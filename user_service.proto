@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package users;
+
+option go_package = "users/pb";
+
+
+import "google/protobuf/empty.proto";
+
+message CreateNewUserRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message CreateNewUserResponse {
+    uint64 user_id = 1;
+}
+
+message DeleteUserRequest {
+    uint64 user_id = 1;
+}
+
+message AddProductToBasketRequest {
+    uint64 product_id = 1;
+}
+
+message DeleteProductFromBasketRequest {
+    uint64 product_id = 1;
+}
+
+message GetUserBasketRequest {
+    uint64 user_id = 1;
+}
+
+message GetUserBasketResponse {
+    message Product {
+        uint64 id = 1;
+        string name = 2;
+        uint64 price = 3;
+        uint64 quantity = 4;
+    }
+    repeated Product products = 1;
+}
+
+message AddMoneyRequest {
+    uint64 user_id = 1;
+    uint64 money_amount = 2;
+}
+
+message WriteOffMoneyRequest {
+    uint64 user_id = 1;
+    uint64 money_amount = 2;
+}
+
+service UserService {
+    rpc CreateNewUser(CreateNewUserRequest) returns (CreateNewUserResponse) {}
+    rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty) {}
+    rpc AddProductToBasket(AddProductToBasketRequest) returns (google.protobuf.Empty) {}
+    rpc DeleteProductFromBasket(DeleteProductFromBasketRequest) returns (google.protobuf.Empty) {}
+    rpc GetUserBasket(GetUserBasketRequest) returns (GetUserBasketResponse) {}
+    rpc AddMoney(AddMoneyRequest) returns (google.protobuf.Empty) {}
+    rpc WriteOffMoney(WriteOffMoneyRequest) returns(google.protobuf.Empty) {}
+}
