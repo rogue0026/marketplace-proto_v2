@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package products;
+
+option go_package = "users/pb";
+
+import "google/protobuf/empty.proto";
+
+message ProductCatalogRequest {
+    uint64 page = 1;
+    uint64 size = 2;
+}
+
+message ProductCatalogResponse {
+    message Product {
+        uint64 id = 1;
+        string name = 2;
+        uint64 price = 3;
+        uint64 quantity = 4;
+    }
+
+    repeated Product products = 1;
+}
+
+message ProductsByIdRequest {
+    repeated uint64 id_list = 1;
+}
+
+message ProductsByIdResponse {
+    message Product {
+        uint64 id = 1;
+        string name = 2;
+        uint64 price = 3;
+        uint64 quantity = 4;
+    }
+
+    repeated Product products = 1;
+}
+
+message AddNewProductRequest {
+    string name = 1;
+    uint64 price = 2;
+    uint64 quantity = 3;
+}
+
+message AddNewProductResponse {
+    uint64 product_id = 1;
+}
+
+message DeleteProductRequest {
+    uint64 product_id = 1;
+}
+
+service ProductService {
+    rpc ProductCatalog(ProductCatalogRequest) returns (ProductCatalogResponse) {}
+    rpc ProductsById(ProductsByIdRequest) returns (ProductsByIdResponse) {}
+    rpc AddNewProduct(AddNewProductRequest) returns (AddNewProductResponse) {}
+    rpc DeleteProduct(DeleteProductRequest) returns (google.protobuf.Empty) {}
+}
