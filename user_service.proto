@@ -21,7 +21,8 @@ message DeleteUserRequest {
 }
 
 message AddProductToBasketRequest {
-    uint64 product_id = 1;
+    uint64 user_id = 1;
+    uint64 product_id = 2;
 }
 
 message DeleteProductFromBasketRequest {

@@ -164,7 +164,8 @@ func (x *DeleteUserRequest) GetUserId() uint64 {
 
 type AddProductToBasketRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ProductId     uint64                 `protobuf:"varint,1,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
+	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	ProductId     uint64                 `protobuf:"varint,2,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -197,6 +198,13 @@ func (x *AddProductToBasketRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use AddProductToBasketRequest.ProtoReflect.Descriptor instead.
 func (*AddProductToBasketRequest) Descriptor() ([]byte, []int) {
 	return file_user_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *AddProductToBasketRequest) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
 }
 
 func (x *AddProductToBasketRequest) GetProductId() uint64 {
@@ -521,10 +529,11 @@ const file_user_service_proto_rawDesc = "" +
 	"\x15CreateNewUserResponse\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x04R\x06userId\",\n" +
 	"\x11DeleteUserRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x04R\x06userId\":\n" +
-	"\x19AddProductToBasketRequest\x12\x1d\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\"S\n" +
+	"\x19AddProductToBasketRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12\x1d\n" +
 	"\n" +
-	"product_id\x18\x01 \x01(\x04R\tproductId\"?\n" +
+	"product_id\x18\x02 \x01(\x04R\tproductId\"?\n" +
 	"\x1eDeleteProductFromBasketRequest\x12\x1d\n" +
 	"\n" +
 	"product_id\x18\x01 \x01(\x04R\tproductId\"/\n" +
