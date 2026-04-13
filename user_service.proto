@@ -29,6 +29,10 @@ message DeleteProductFromBasketRequest {
     uint64 product_id = 1;
 }
 
+message ClearBasketRequest {
+    uint64 user_id = 1;
+}
+
 message GetUserBasketRequest {
     uint64 user_id = 1;
 }
@@ -58,6 +62,7 @@ service UserService {
     rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty) {}
     rpc AddProductToBasket(AddProductToBasketRequest) returns (google.protobuf.Empty) {}
     rpc DeleteProductFromBasket(DeleteProductFromBasketRequest) returns (google.protobuf.Empty) {}
+    rpc ClearBasket(ClearBasketRequest) returns (google.protobuf.Empty) {}
     rpc GetUserBasket(GetUserBasketRequest) returns (GetUserBasketResponse) {}
     rpc AddMoney(AddMoneyRequest) returns (google.protobuf.Empty) {}
     rpc WriteOffMoney(WriteOffMoneyRequest) returns(google.protobuf.Empty) {}

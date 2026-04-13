@@ -258,6 +258,50 @@ func (x *DeleteProductFromBasketRequest) GetProductId() uint64 {
 	return 0
 }
 
+type ClearBasketRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClearBasketRequest) Reset() {
+	*x = ClearBasketRequest{}
+	mi := &file_user_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClearBasketRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClearBasketRequest) ProtoMessage() {}
+
+func (x *ClearBasketRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClearBasketRequest.ProtoReflect.Descriptor instead.
+func (*ClearBasketRequest) Descriptor() ([]byte, []int) {
+	return file_user_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ClearBasketRequest) GetUserId() uint64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
 type GetUserBasketRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -267,7 +311,7 @@ type GetUserBasketRequest struct {
 
 func (x *GetUserBasketRequest) Reset() {
 	*x = GetUserBasketRequest{}
-	mi := &file_user_service_proto_msgTypes[5]
+	mi := &file_user_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -279,7 +323,7 @@ func (x *GetUserBasketRequest) String() string {
 func (*GetUserBasketRequest) ProtoMessage() {}
 
 func (x *GetUserBasketRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_proto_msgTypes[5]
+	mi := &file_user_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -292,7 +336,7 @@ func (x *GetUserBasketRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserBasketRequest.ProtoReflect.Descriptor instead.
 func (*GetUserBasketRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_proto_rawDescGZIP(), []int{5}
+	return file_user_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *GetUserBasketRequest) GetUserId() uint64 {
@@ -311,7 +355,7 @@ type GetUserBasketResponse struct {
 
 func (x *GetUserBasketResponse) Reset() {
 	*x = GetUserBasketResponse{}
-	mi := &file_user_service_proto_msgTypes[6]
+	mi := &file_user_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -323,7 +367,7 @@ func (x *GetUserBasketResponse) String() string {
 func (*GetUserBasketResponse) ProtoMessage() {}
 
 func (x *GetUserBasketResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_proto_msgTypes[6]
+	mi := &file_user_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -336,7 +380,7 @@ func (x *GetUserBasketResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserBasketResponse.ProtoReflect.Descriptor instead.
 func (*GetUserBasketResponse) Descriptor() ([]byte, []int) {
-	return file_user_service_proto_rawDescGZIP(), []int{6}
+	return file_user_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *GetUserBasketResponse) GetProducts() []*GetUserBasketResponse_Product {
@@ -356,7 +400,7 @@ type AddMoneyRequest struct {
 
 func (x *AddMoneyRequest) Reset() {
 	*x = AddMoneyRequest{}
-	mi := &file_user_service_proto_msgTypes[7]
+	mi := &file_user_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -368,7 +412,7 @@ func (x *AddMoneyRequest) String() string {
 func (*AddMoneyRequest) ProtoMessage() {}
 
 func (x *AddMoneyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_proto_msgTypes[7]
+	mi := &file_user_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -381,7 +425,7 @@ func (x *AddMoneyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddMoneyRequest.ProtoReflect.Descriptor instead.
 func (*AddMoneyRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_proto_rawDescGZIP(), []int{7}
+	return file_user_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *AddMoneyRequest) GetUserId() uint64 {
@@ -408,7 +452,7 @@ type WriteOffMoneyRequest struct {
 
 func (x *WriteOffMoneyRequest) Reset() {
 	*x = WriteOffMoneyRequest{}
-	mi := &file_user_service_proto_msgTypes[8]
+	mi := &file_user_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -420,7 +464,7 @@ func (x *WriteOffMoneyRequest) String() string {
 func (*WriteOffMoneyRequest) ProtoMessage() {}
 
 func (x *WriteOffMoneyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_proto_msgTypes[8]
+	mi := &file_user_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -433,7 +477,7 @@ func (x *WriteOffMoneyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WriteOffMoneyRequest.ProtoReflect.Descriptor instead.
 func (*WriteOffMoneyRequest) Descriptor() ([]byte, []int) {
-	return file_user_service_proto_rawDescGZIP(), []int{8}
+	return file_user_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *WriteOffMoneyRequest) GetUserId() uint64 {
@@ -462,7 +506,7 @@ type GetUserBasketResponse_Product struct {
 
 func (x *GetUserBasketResponse_Product) Reset() {
 	*x = GetUserBasketResponse_Product{}
-	mi := &file_user_service_proto_msgTypes[9]
+	mi := &file_user_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -474,7 +518,7 @@ func (x *GetUserBasketResponse_Product) String() string {
 func (*GetUserBasketResponse_Product) ProtoMessage() {}
 
 func (x *GetUserBasketResponse_Product) ProtoReflect() protoreflect.Message {
-	mi := &file_user_service_proto_msgTypes[9]
+	mi := &file_user_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -487,7 +531,7 @@ func (x *GetUserBasketResponse_Product) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserBasketResponse_Product.ProtoReflect.Descriptor instead.
 func (*GetUserBasketResponse_Product) Descriptor() ([]byte, []int) {
-	return file_user_service_proto_rawDescGZIP(), []int{6, 0}
+	return file_user_service_proto_rawDescGZIP(), []int{7, 0}
 }
 
 func (x *GetUserBasketResponse_Product) GetId() uint64 {
@@ -536,7 +580,9 @@ const file_user_service_proto_rawDesc = "" +
 	"product_id\x18\x02 \x01(\x04R\tproductId\"?\n" +
 	"\x1eDeleteProductFromBasketRequest\x12\x1d\n" +
 	"\n" +
-	"product_id\x18\x01 \x01(\x04R\tproductId\"/\n" +
+	"product_id\x18\x01 \x01(\x04R\tproductId\"-\n" +
+	"\x12ClearBasketRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x04R\x06userId\"/\n" +
 	"\x14GetUserBasketRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x04R\x06userId\"\xba\x01\n" +
 	"\x15GetUserBasketResponse\x12@\n" +
@@ -551,13 +597,14 @@ const file_user_service_proto_rawDesc = "" +
 	"\fmoney_amount\x18\x02 \x01(\x04R\vmoneyAmount\"R\n" +
 	"\x14WriteOffMoneyRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12!\n" +
-	"\fmoney_amount\x18\x02 \x01(\x04R\vmoneyAmount2\x9f\x04\n" +
+	"\fmoney_amount\x18\x02 \x01(\x04R\vmoneyAmount2\xe3\x04\n" +
 	"\vUserService\x12L\n" +
 	"\rCreateNewUser\x12\x1b.users.CreateNewUserRequest\x1a\x1c.users.CreateNewUserResponse\"\x00\x12@\n" +
 	"\n" +
 	"DeleteUser\x12\x18.users.DeleteUserRequest\x1a\x16.google.protobuf.Empty\"\x00\x12P\n" +
 	"\x12AddProductToBasket\x12 .users.AddProductToBasketRequest\x1a\x16.google.protobuf.Empty\"\x00\x12Z\n" +
-	"\x17DeleteProductFromBasket\x12%.users.DeleteProductFromBasketRequest\x1a\x16.google.protobuf.Empty\"\x00\x12L\n" +
+	"\x17DeleteProductFromBasket\x12%.users.DeleteProductFromBasketRequest\x1a\x16.google.protobuf.Empty\"\x00\x12B\n" +
+	"\vClearBasket\x12\x19.users.ClearBasketRequest\x1a\x16.google.protobuf.Empty\"\x00\x12L\n" +
 	"\rGetUserBasket\x12\x1b.users.GetUserBasketRequest\x1a\x1c.users.GetUserBasketResponse\"\x00\x12<\n" +
 	"\bAddMoney\x12\x16.users.AddMoneyRequest\x1a\x16.google.protobuf.Empty\"\x00\x12F\n" +
 	"\rWriteOffMoney\x12\x1b.users.WriteOffMoneyRequest\x1a\x16.google.protobuf.Empty\"\x00B\n" +
@@ -575,38 +622,41 @@ func file_user_service_proto_rawDescGZIP() []byte {
 	return file_user_service_proto_rawDescData
 }
 
-var file_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_user_service_proto_goTypes = []any{
 	(*CreateNewUserRequest)(nil),           // 0: users.CreateNewUserRequest
 	(*CreateNewUserResponse)(nil),          // 1: users.CreateNewUserResponse
 	(*DeleteUserRequest)(nil),              // 2: users.DeleteUserRequest
 	(*AddProductToBasketRequest)(nil),      // 3: users.AddProductToBasketRequest
 	(*DeleteProductFromBasketRequest)(nil), // 4: users.DeleteProductFromBasketRequest
-	(*GetUserBasketRequest)(nil),           // 5: users.GetUserBasketRequest
-	(*GetUserBasketResponse)(nil),          // 6: users.GetUserBasketResponse
-	(*AddMoneyRequest)(nil),                // 7: users.AddMoneyRequest
-	(*WriteOffMoneyRequest)(nil),           // 8: users.WriteOffMoneyRequest
-	(*GetUserBasketResponse_Product)(nil),  // 9: users.GetUserBasketResponse.Product
-	(*emptypb.Empty)(nil),                  // 10: google.protobuf.Empty
+	(*ClearBasketRequest)(nil),             // 5: users.ClearBasketRequest
+	(*GetUserBasketRequest)(nil),           // 6: users.GetUserBasketRequest
+	(*GetUserBasketResponse)(nil),          // 7: users.GetUserBasketResponse
+	(*AddMoneyRequest)(nil),                // 8: users.AddMoneyRequest
+	(*WriteOffMoneyRequest)(nil),           // 9: users.WriteOffMoneyRequest
+	(*GetUserBasketResponse_Product)(nil),  // 10: users.GetUserBasketResponse.Product
+	(*emptypb.Empty)(nil),                  // 11: google.protobuf.Empty
 }
 var file_user_service_proto_depIdxs = []int32{
-	9,  // 0: users.GetUserBasketResponse.products:type_name -> users.GetUserBasketResponse.Product
+	10, // 0: users.GetUserBasketResponse.products:type_name -> users.GetUserBasketResponse.Product
 	0,  // 1: users.UserService.CreateNewUser:input_type -> users.CreateNewUserRequest
 	2,  // 2: users.UserService.DeleteUser:input_type -> users.DeleteUserRequest
 	3,  // 3: users.UserService.AddProductToBasket:input_type -> users.AddProductToBasketRequest
 	4,  // 4: users.UserService.DeleteProductFromBasket:input_type -> users.DeleteProductFromBasketRequest
-	5,  // 5: users.UserService.GetUserBasket:input_type -> users.GetUserBasketRequest
-	7,  // 6: users.UserService.AddMoney:input_type -> users.AddMoneyRequest
-	8,  // 7: users.UserService.WriteOffMoney:input_type -> users.WriteOffMoneyRequest
-	1,  // 8: users.UserService.CreateNewUser:output_type -> users.CreateNewUserResponse
-	10, // 9: users.UserService.DeleteUser:output_type -> google.protobuf.Empty
-	10, // 10: users.UserService.AddProductToBasket:output_type -> google.protobuf.Empty
-	10, // 11: users.UserService.DeleteProductFromBasket:output_type -> google.protobuf.Empty
-	6,  // 12: users.UserService.GetUserBasket:output_type -> users.GetUserBasketResponse
-	10, // 13: users.UserService.AddMoney:output_type -> google.protobuf.Empty
-	10, // 14: users.UserService.WriteOffMoney:output_type -> google.protobuf.Empty
-	8,  // [8:15] is the sub-list for method output_type
-	1,  // [1:8] is the sub-list for method input_type
+	5,  // 5: users.UserService.ClearBasket:input_type -> users.ClearBasketRequest
+	6,  // 6: users.UserService.GetUserBasket:input_type -> users.GetUserBasketRequest
+	8,  // 7: users.UserService.AddMoney:input_type -> users.AddMoneyRequest
+	9,  // 8: users.UserService.WriteOffMoney:input_type -> users.WriteOffMoneyRequest
+	1,  // 9: users.UserService.CreateNewUser:output_type -> users.CreateNewUserResponse
+	11, // 10: users.UserService.DeleteUser:output_type -> google.protobuf.Empty
+	11, // 11: users.UserService.AddProductToBasket:output_type -> google.protobuf.Empty
+	11, // 12: users.UserService.DeleteProductFromBasket:output_type -> google.protobuf.Empty
+	11, // 13: users.UserService.ClearBasket:output_type -> google.protobuf.Empty
+	7,  // 14: users.UserService.GetUserBasket:output_type -> users.GetUserBasketResponse
+	11, // 15: users.UserService.AddMoney:output_type -> google.protobuf.Empty
+	11, // 16: users.UserService.WriteOffMoney:output_type -> google.protobuf.Empty
+	9,  // [9:17] is the sub-list for method output_type
+	1,  // [1:9] is the sub-list for method input_type
 	1,  // [1:1] is the sub-list for extension type_name
 	1,  // [1:1] is the sub-list for extension extendee
 	0,  // [0:1] is the sub-list for field type_name
@@ -623,7 +673,7 @@ func file_user_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_proto_rawDesc), len(file_user_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

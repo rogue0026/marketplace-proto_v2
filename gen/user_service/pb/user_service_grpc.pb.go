@@ -24,6 +24,7 @@ const (
 	UserService_DeleteUser_FullMethodName              = "/users.UserService/DeleteUser"
 	UserService_AddProductToBasket_FullMethodName      = "/users.UserService/AddProductToBasket"
 	UserService_DeleteProductFromBasket_FullMethodName = "/users.UserService/DeleteProductFromBasket"
+	UserService_ClearBasket_FullMethodName             = "/users.UserService/ClearBasket"
 	UserService_GetUserBasket_FullMethodName           = "/users.UserService/GetUserBasket"
 	UserService_AddMoney_FullMethodName                = "/users.UserService/AddMoney"
 	UserService_WriteOffMoney_FullMethodName           = "/users.UserService/WriteOffMoney"
@@ -37,6 +38,7 @@ type UserServiceClient interface {
 	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	AddProductToBasket(ctx context.Context, in *AddProductToBasketRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	DeleteProductFromBasket(ctx context.Context, in *DeleteProductFromBasketRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	ClearBasket(ctx context.Context, in *ClearBasketRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetUserBasket(ctx context.Context, in *GetUserBasketRequest, opts ...grpc.CallOption) (*GetUserBasketResponse, error)
 	AddMoney(ctx context.Context, in *AddMoneyRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	WriteOffMoney(ctx context.Context, in *WriteOffMoneyRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -90,6 +92,16 @@ func (c *userServiceClient) DeleteProductFromBasket(ctx context.Context, in *Del
 	return out, nil
 }
 
+func (c *userServiceClient) ClearBasket(ctx context.Context, in *ClearBasketRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, UserService_ClearBasket_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userServiceClient) GetUserBasket(ctx context.Context, in *GetUserBasketRequest, opts ...grpc.CallOption) (*GetUserBasketResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUserBasketResponse)
@@ -128,6 +140,7 @@ type UserServiceServer interface {
 	DeleteUser(context.Context, *DeleteUserRequest) (*emptypb.Empty, error)
 	AddProductToBasket(context.Context, *AddProductToBasketRequest) (*emptypb.Empty, error)
 	DeleteProductFromBasket(context.Context, *DeleteProductFromBasketRequest) (*emptypb.Empty, error)
+	ClearBasket(context.Context, *ClearBasketRequest) (*emptypb.Empty, error)
 	GetUserBasket(context.Context, *GetUserBasketRequest) (*GetUserBasketResponse, error)
 	AddMoney(context.Context, *AddMoneyRequest) (*emptypb.Empty, error)
 	WriteOffMoney(context.Context, *WriteOffMoneyRequest) (*emptypb.Empty, error)
@@ -152,6 +165,9 @@ func (UnimplementedUserServiceServer) AddProductToBasket(context.Context, *AddPr
 }
 func (UnimplementedUserServiceServer) DeleteProductFromBasket(context.Context, *DeleteProductFromBasketRequest) (*emptypb.Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteProductFromBasket not implemented")
+}
+func (UnimplementedUserServiceServer) ClearBasket(context.Context, *ClearBasketRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method ClearBasket not implemented")
 }
 func (UnimplementedUserServiceServer) GetUserBasket(context.Context, *GetUserBasketRequest) (*GetUserBasketResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetUserBasket not implemented")
@@ -255,6 +271,24 @@ func _UserService_DeleteProductFromBasket_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_ClearBasket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClearBasketRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).ClearBasket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_ClearBasket_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).ClearBasket(ctx, req.(*ClearBasketRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _UserService_GetUserBasket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUserBasketRequest)
 	if err := dec(in); err != nil {
@@ -331,6 +365,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteProductFromBasket",
 			Handler:    _UserService_DeleteProductFromBasket_Handler,
+		},
+		{
+			MethodName: "ClearBasket",
+			Handler:    _UserService_ClearBasket_Handler,
 		},
 		{
 			MethodName: "GetUserBasket",
