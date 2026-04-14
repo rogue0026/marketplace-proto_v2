@@ -20,10 +20,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ProductService_ProductCatalog_FullMethodName = "/products.ProductService/ProductCatalog"
-	ProductService_ProductsById_FullMethodName   = "/products.ProductService/ProductsById"
-	ProductService_AddNewProduct_FullMethodName  = "/products.ProductService/AddNewProduct"
-	ProductService_DeleteProduct_FullMethodName  = "/products.ProductService/DeleteProduct"
+	ProductService_ProductCatalog_FullMethodName             = "/products.ProductService/ProductCatalog"
+	ProductService_ProductsById_FullMethodName               = "/products.ProductService/ProductsById"
+	ProductService_AddNewProduct_FullMethodName              = "/products.ProductService/AddNewProduct"
+	ProductService_DeleteProduct_FullMethodName              = "/products.ProductService/DeleteProduct"
+	ProductService_ReserveProducts_FullMethodName            = "/products.ProductService/ReserveProducts"
+	ProductService_CancelReservationsForOrder_FullMethodName = "/products.ProductService/CancelReservationsForOrder"
 )
 
 // ProductServiceClient is the client API for ProductService service.
@@ -34,6 +36,8 @@ type ProductServiceClient interface {
 	ProductsById(ctx context.Context, in *ProductsByIdRequest, opts ...grpc.CallOption) (*ProductsByIdResponse, error)
 	AddNewProduct(ctx context.Context, in *AddNewProductRequest, opts ...grpc.CallOption) (*AddNewProductResponse, error)
 	DeleteProduct(ctx context.Context, in *DeleteProductRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	ReserveProducts(ctx context.Context, in *ReserveProductsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	CancelReservationsForOrder(ctx context.Context, in *CancelReservationsForOrderRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type productServiceClient struct {
@@ -84,6 +88,26 @@ func (c *productServiceClient) DeleteProduct(ctx context.Context, in *DeleteProd
 	return out, nil
 }
 
+func (c *productServiceClient) ReserveProducts(ctx context.Context, in *ReserveProductsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, ProductService_ReserveProducts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productServiceClient) CancelReservationsForOrder(ctx context.Context, in *CancelReservationsForOrderRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, ProductService_CancelReservationsForOrder_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProductServiceServer is the server API for ProductService service.
 // All implementations must embed UnimplementedProductServiceServer
 // for forward compatibility.
@@ -92,6 +116,8 @@ type ProductServiceServer interface {
 	ProductsById(context.Context, *ProductsByIdRequest) (*ProductsByIdResponse, error)
 	AddNewProduct(context.Context, *AddNewProductRequest) (*AddNewProductResponse, error)
 	DeleteProduct(context.Context, *DeleteProductRequest) (*emptypb.Empty, error)
+	ReserveProducts(context.Context, *ReserveProductsRequest) (*emptypb.Empty, error)
+	CancelReservationsForOrder(context.Context, *CancelReservationsForOrderRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedProductServiceServer()
 }
 
@@ -113,6 +139,12 @@ func (UnimplementedProductServiceServer) AddNewProduct(context.Context, *AddNewP
 }
 func (UnimplementedProductServiceServer) DeleteProduct(context.Context, *DeleteProductRequest) (*emptypb.Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteProduct not implemented")
+}
+func (UnimplementedProductServiceServer) ReserveProducts(context.Context, *ReserveProductsRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReserveProducts not implemented")
+}
+func (UnimplementedProductServiceServer) CancelReservationsForOrder(context.Context, *CancelReservationsForOrderRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method CancelReservationsForOrder not implemented")
 }
 func (UnimplementedProductServiceServer) mustEmbedUnimplementedProductServiceServer() {}
 func (UnimplementedProductServiceServer) testEmbeddedByValue()                        {}
@@ -207,6 +239,42 @@ func _ProductService_DeleteProduct_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProductService_ReserveProducts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReserveProductsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductServiceServer).ReserveProducts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductService_ReserveProducts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductServiceServer).ReserveProducts(ctx, req.(*ReserveProductsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductService_CancelReservationsForOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelReservationsForOrderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductServiceServer).CancelReservationsForOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductService_CancelReservationsForOrder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductServiceServer).CancelReservationsForOrder(ctx, req.(*CancelReservationsForOrderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProductService_ServiceDesc is the grpc.ServiceDesc for ProductService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -229,6 +297,14 @@ var ProductService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteProduct",
 			Handler:    _ProductService_DeleteProduct_Handler,
+		},
+		{
+			MethodName: "ReserveProducts",
+			Handler:    _ProductService_ReserveProducts_Handler,
+		},
+		{
+			MethodName: "CancelReservationsForOrder",
+			Handler:    _ProductService_CancelReservationsForOrder_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
