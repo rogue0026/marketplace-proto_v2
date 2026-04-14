@@ -12,6 +12,15 @@ message CreateOrderResponse {
     uint64 order_id = 1;
 }
 
+message PayForOrderRequest {
+    uint64 order_id = 1;
+}
+
+message PayForOrderResponse {
+    uint64 payment_id = 1;
+}
+
 service OrderService {
     rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse) {}
+    rpc PayForOrder(PayForOrderRequest) returns (PayForOrderResponse) {}
 }
