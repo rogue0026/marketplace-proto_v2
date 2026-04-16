@@ -7,6 +7,14 @@ option go_package = "users/pb";
 
 import "google/protobuf/empty.proto";
 
+enum Reason {
+    USER_NOT_FOUND = 0;
+    USER_ALREADY_EXISTS = 1;
+    PRODUCT_NOT_FOUND = 2;
+    BASKET_IS_EMPTY = 3;
+    NOT_ENOUGH_MONEY = 4;
+}
+
 message CreateNewUserRequest {
     string username = 1;
     string password = 2;

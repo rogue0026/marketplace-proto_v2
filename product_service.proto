@@ -6,6 +6,12 @@ option go_package = "users/pb";
 
 import "google/protobuf/empty.proto";
 
+enum Reason {
+    PRODUCTS_NOT_FOUND = 0;
+    INVALID_USER_INPUT = 1;
+    NOT_ENOUGH_PRODUCTS = 2;
+}
+
 message ProductCatalogRequest {
     uint64 page = 1;
     uint64 size = 2;

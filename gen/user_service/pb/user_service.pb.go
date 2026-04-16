@@ -22,6 +22,61 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type Reason int32
+
+const (
+	Reason_USER_NOT_FOUND      Reason = 0
+	Reason_USER_ALREADY_EXISTS Reason = 1
+	Reason_PRODUCT_NOT_FOUND   Reason = 2
+	Reason_BASKET_IS_EMPTY     Reason = 3
+	Reason_NOT_ENOUGH_MONEY    Reason = 4
+)
+
+// Enum value maps for Reason.
+var (
+	Reason_name = map[int32]string{
+		0: "USER_NOT_FOUND",
+		1: "USER_ALREADY_EXISTS",
+		2: "PRODUCT_NOT_FOUND",
+		3: "BASKET_IS_EMPTY",
+		4: "NOT_ENOUGH_MONEY",
+	}
+	Reason_value = map[string]int32{
+		"USER_NOT_FOUND":      0,
+		"USER_ALREADY_EXISTS": 1,
+		"PRODUCT_NOT_FOUND":   2,
+		"BASKET_IS_EMPTY":     3,
+		"NOT_ENOUGH_MONEY":    4,
+	}
+)
+
+func (x Reason) Enum() *Reason {
+	p := new(Reason)
+	*p = x
+	return p
+}
+
+func (x Reason) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Reason) Descriptor() protoreflect.EnumDescriptor {
+	return file_user_service_proto_enumTypes[0].Descriptor()
+}
+
+func (Reason) Type() protoreflect.EnumType {
+	return &file_user_service_proto_enumTypes[0]
+}
+
+func (x Reason) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Reason.Descriptor instead.
+func (Reason) EnumDescriptor() ([]byte, []int) {
+	return file_user_service_proto_rawDescGZIP(), []int{0}
+}
+
 type CreateNewUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
@@ -597,7 +652,13 @@ const file_user_service_proto_rawDesc = "" +
 	"\fmoney_amount\x18\x02 \x01(\x04R\vmoneyAmount\"R\n" +
 	"\x14WriteOffMoneyRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x04R\x06userId\x12!\n" +
-	"\fmoney_amount\x18\x02 \x01(\x04R\vmoneyAmount2\xe3\x04\n" +
+	"\fmoney_amount\x18\x02 \x01(\x04R\vmoneyAmount*w\n" +
+	"\x06Reason\x12\x12\n" +
+	"\x0eUSER_NOT_FOUND\x10\x00\x12\x17\n" +
+	"\x13USER_ALREADY_EXISTS\x10\x01\x12\x15\n" +
+	"\x11PRODUCT_NOT_FOUND\x10\x02\x12\x13\n" +
+	"\x0fBASKET_IS_EMPTY\x10\x03\x12\x14\n" +
+	"\x10NOT_ENOUGH_MONEY\x10\x042\xe3\x04\n" +
 	"\vUserService\x12L\n" +
 	"\rCreateNewUser\x12\x1b.users.CreateNewUserRequest\x1a\x1c.users.CreateNewUserResponse\"\x00\x12@\n" +
 	"\n" +
@@ -622,39 +683,41 @@ func file_user_service_proto_rawDescGZIP() []byte {
 	return file_user_service_proto_rawDescData
 }
 
+var file_user_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_user_service_proto_goTypes = []any{
-	(*CreateNewUserRequest)(nil),           // 0: users.CreateNewUserRequest
-	(*CreateNewUserResponse)(nil),          // 1: users.CreateNewUserResponse
-	(*DeleteUserRequest)(nil),              // 2: users.DeleteUserRequest
-	(*AddProductToBasketRequest)(nil),      // 3: users.AddProductToBasketRequest
-	(*DeleteProductFromBasketRequest)(nil), // 4: users.DeleteProductFromBasketRequest
-	(*ClearBasketRequest)(nil),             // 5: users.ClearBasketRequest
-	(*GetUserBasketRequest)(nil),           // 6: users.GetUserBasketRequest
-	(*GetUserBasketResponse)(nil),          // 7: users.GetUserBasketResponse
-	(*AddMoneyRequest)(nil),                // 8: users.AddMoneyRequest
-	(*WriteOffMoneyRequest)(nil),           // 9: users.WriteOffMoneyRequest
-	(*GetUserBasketResponse_Product)(nil),  // 10: users.GetUserBasketResponse.Product
-	(*emptypb.Empty)(nil),                  // 11: google.protobuf.Empty
+	(Reason)(0),                            // 0: users.Reason
+	(*CreateNewUserRequest)(nil),           // 1: users.CreateNewUserRequest
+	(*CreateNewUserResponse)(nil),          // 2: users.CreateNewUserResponse
+	(*DeleteUserRequest)(nil),              // 3: users.DeleteUserRequest
+	(*AddProductToBasketRequest)(nil),      // 4: users.AddProductToBasketRequest
+	(*DeleteProductFromBasketRequest)(nil), // 5: users.DeleteProductFromBasketRequest
+	(*ClearBasketRequest)(nil),             // 6: users.ClearBasketRequest
+	(*GetUserBasketRequest)(nil),           // 7: users.GetUserBasketRequest
+	(*GetUserBasketResponse)(nil),          // 8: users.GetUserBasketResponse
+	(*AddMoneyRequest)(nil),                // 9: users.AddMoneyRequest
+	(*WriteOffMoneyRequest)(nil),           // 10: users.WriteOffMoneyRequest
+	(*GetUserBasketResponse_Product)(nil),  // 11: users.GetUserBasketResponse.Product
+	(*emptypb.Empty)(nil),                  // 12: google.protobuf.Empty
 }
 var file_user_service_proto_depIdxs = []int32{
-	10, // 0: users.GetUserBasketResponse.products:type_name -> users.GetUserBasketResponse.Product
-	0,  // 1: users.UserService.CreateNewUser:input_type -> users.CreateNewUserRequest
-	2,  // 2: users.UserService.DeleteUser:input_type -> users.DeleteUserRequest
-	3,  // 3: users.UserService.AddProductToBasket:input_type -> users.AddProductToBasketRequest
-	4,  // 4: users.UserService.DeleteProductFromBasket:input_type -> users.DeleteProductFromBasketRequest
-	5,  // 5: users.UserService.ClearBasket:input_type -> users.ClearBasketRequest
-	6,  // 6: users.UserService.GetUserBasket:input_type -> users.GetUserBasketRequest
-	8,  // 7: users.UserService.AddMoney:input_type -> users.AddMoneyRequest
-	9,  // 8: users.UserService.WriteOffMoney:input_type -> users.WriteOffMoneyRequest
-	1,  // 9: users.UserService.CreateNewUser:output_type -> users.CreateNewUserResponse
-	11, // 10: users.UserService.DeleteUser:output_type -> google.protobuf.Empty
-	11, // 11: users.UserService.AddProductToBasket:output_type -> google.protobuf.Empty
-	11, // 12: users.UserService.DeleteProductFromBasket:output_type -> google.protobuf.Empty
-	11, // 13: users.UserService.ClearBasket:output_type -> google.protobuf.Empty
-	7,  // 14: users.UserService.GetUserBasket:output_type -> users.GetUserBasketResponse
-	11, // 15: users.UserService.AddMoney:output_type -> google.protobuf.Empty
-	11, // 16: users.UserService.WriteOffMoney:output_type -> google.protobuf.Empty
+	11, // 0: users.GetUserBasketResponse.products:type_name -> users.GetUserBasketResponse.Product
+	1,  // 1: users.UserService.CreateNewUser:input_type -> users.CreateNewUserRequest
+	3,  // 2: users.UserService.DeleteUser:input_type -> users.DeleteUserRequest
+	4,  // 3: users.UserService.AddProductToBasket:input_type -> users.AddProductToBasketRequest
+	5,  // 4: users.UserService.DeleteProductFromBasket:input_type -> users.DeleteProductFromBasketRequest
+	6,  // 5: users.UserService.ClearBasket:input_type -> users.ClearBasketRequest
+	7,  // 6: users.UserService.GetUserBasket:input_type -> users.GetUserBasketRequest
+	9,  // 7: users.UserService.AddMoney:input_type -> users.AddMoneyRequest
+	10, // 8: users.UserService.WriteOffMoney:input_type -> users.WriteOffMoneyRequest
+	2,  // 9: users.UserService.CreateNewUser:output_type -> users.CreateNewUserResponse
+	12, // 10: users.UserService.DeleteUser:output_type -> google.protobuf.Empty
+	12, // 11: users.UserService.AddProductToBasket:output_type -> google.protobuf.Empty
+	12, // 12: users.UserService.DeleteProductFromBasket:output_type -> google.protobuf.Empty
+	12, // 13: users.UserService.ClearBasket:output_type -> google.protobuf.Empty
+	8,  // 14: users.UserService.GetUserBasket:output_type -> users.GetUserBasketResponse
+	12, // 15: users.UserService.AddMoney:output_type -> google.protobuf.Empty
+	12, // 16: users.UserService.WriteOffMoney:output_type -> google.protobuf.Empty
 	9,  // [9:17] is the sub-list for method output_type
 	1,  // [1:9] is the sub-list for method input_type
 	1,  // [1:1] is the sub-list for extension type_name
@@ -672,13 +735,14 @@ func file_user_service_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_service_proto_rawDesc), len(file_user_service_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_user_service_proto_goTypes,
 		DependencyIndexes: file_user_service_proto_depIdxs,
+		EnumInfos:         file_user_service_proto_enumTypes,
 		MessageInfos:      file_user_service_proto_msgTypes,
 	}.Build()
 	File_user_service_proto = out.File
