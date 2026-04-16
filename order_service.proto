@@ -4,6 +4,15 @@ package orders;
 
 option go_package = "orders/pb";
 
+enum Reason {
+    NOT_ENOUGH_PRODUCTS = 0;
+    NOT_ENOUGH_MONEY = 1;
+    PRODUCT_DOES_NOT_EXISTS = 2;
+    USER_NOT_FOUND = 3;
+    ORDER_NOT_FOUND = 4;
+    BASKET_IS_EMPTY = 5;
+}
+
 message CreateOrderRequest {
     uint64 user_id = 1;
 }

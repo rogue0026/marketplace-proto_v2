@@ -21,6 +21,64 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type Reason int32
+
+const (
+	Reason_NOT_ENOUGH_PRODUCTS     Reason = 0
+	Reason_NOT_ENOUGH_MONEY        Reason = 1
+	Reason_PRODUCT_DOES_NOT_EXISTS Reason = 2
+	Reason_USER_NOT_FOUND          Reason = 3
+	Reason_ORDER_NOT_FOUND         Reason = 4
+	Reason_BASKET_IS_EMPTY         Reason = 5
+)
+
+// Enum value maps for Reason.
+var (
+	Reason_name = map[int32]string{
+		0: "NOT_ENOUGH_PRODUCTS",
+		1: "NOT_ENOUGH_MONEY",
+		2: "PRODUCT_DOES_NOT_EXISTS",
+		3: "USER_NOT_FOUND",
+		4: "ORDER_NOT_FOUND",
+		5: "BASKET_IS_EMPTY",
+	}
+	Reason_value = map[string]int32{
+		"NOT_ENOUGH_PRODUCTS":     0,
+		"NOT_ENOUGH_MONEY":        1,
+		"PRODUCT_DOES_NOT_EXISTS": 2,
+		"USER_NOT_FOUND":          3,
+		"ORDER_NOT_FOUND":         4,
+		"BASKET_IS_EMPTY":         5,
+	}
+)
+
+func (x Reason) Enum() *Reason {
+	p := new(Reason)
+	*p = x
+	return p
+}
+
+func (x Reason) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Reason) Descriptor() protoreflect.EnumDescriptor {
+	return file_order_service_proto_enumTypes[0].Descriptor()
+}
+
+func (Reason) Type() protoreflect.EnumType {
+	return &file_order_service_proto_enumTypes[0]
+}
+
+func (x Reason) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Reason.Descriptor instead.
+func (Reason) EnumDescriptor() ([]byte, []int) {
+	return file_order_service_proto_rawDescGZIP(), []int{0}
+}
+
 type CreateOrderRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        uint64                 `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -210,7 +268,14 @@ const file_order_service_proto_rawDesc = "" +
 	"\border_id\x18\x01 \x01(\x04R\aorderId\"4\n" +
 	"\x13PayForOrderResponse\x12\x1d\n" +
 	"\n" +
-	"payment_id\x18\x01 \x01(\x04R\tpaymentId2\xa2\x01\n" +
+	"payment_id\x18\x01 \x01(\x04R\tpaymentId*\x92\x01\n" +
+	"\x06Reason\x12\x17\n" +
+	"\x13NOT_ENOUGH_PRODUCTS\x10\x00\x12\x14\n" +
+	"\x10NOT_ENOUGH_MONEY\x10\x01\x12\x1b\n" +
+	"\x17PRODUCT_DOES_NOT_EXISTS\x10\x02\x12\x12\n" +
+	"\x0eUSER_NOT_FOUND\x10\x03\x12\x13\n" +
+	"\x0fORDER_NOT_FOUND\x10\x04\x12\x13\n" +
+	"\x0fBASKET_IS_EMPTY\x10\x052\xa2\x01\n" +
 	"\fOrderService\x12H\n" +
 	"\vCreateOrder\x12\x1a.orders.CreateOrderRequest\x1a\x1b.orders.CreateOrderResponse\"\x00\x12H\n" +
 	"\vPayForOrder\x12\x1a.orders.PayForOrderRequest\x1a\x1b.orders.PayForOrderResponse\"\x00B\vZ\torders/pbb\x06proto3"
@@ -227,18 +292,20 @@ func file_order_service_proto_rawDescGZIP() []byte {
 	return file_order_service_proto_rawDescData
 }
 
+var file_order_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_order_service_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_order_service_proto_goTypes = []any{
-	(*CreateOrderRequest)(nil),  // 0: orders.CreateOrderRequest
-	(*CreateOrderResponse)(nil), // 1: orders.CreateOrderResponse
-	(*PayForOrderRequest)(nil),  // 2: orders.PayForOrderRequest
-	(*PayForOrderResponse)(nil), // 3: orders.PayForOrderResponse
+	(Reason)(0),                 // 0: orders.Reason
+	(*CreateOrderRequest)(nil),  // 1: orders.CreateOrderRequest
+	(*CreateOrderResponse)(nil), // 2: orders.CreateOrderResponse
+	(*PayForOrderRequest)(nil),  // 3: orders.PayForOrderRequest
+	(*PayForOrderResponse)(nil), // 4: orders.PayForOrderResponse
 }
 var file_order_service_proto_depIdxs = []int32{
-	0, // 0: orders.OrderService.CreateOrder:input_type -> orders.CreateOrderRequest
-	2, // 1: orders.OrderService.PayForOrder:input_type -> orders.PayForOrderRequest
-	1, // 2: orders.OrderService.CreateOrder:output_type -> orders.CreateOrderResponse
-	3, // 3: orders.OrderService.PayForOrder:output_type -> orders.PayForOrderResponse
+	1, // 0: orders.OrderService.CreateOrder:input_type -> orders.CreateOrderRequest
+	3, // 1: orders.OrderService.PayForOrder:input_type -> orders.PayForOrderRequest
+	2, // 2: orders.OrderService.CreateOrder:output_type -> orders.CreateOrderResponse
+	4, // 3: orders.OrderService.PayForOrder:output_type -> orders.PayForOrderResponse
 	2, // [2:4] is the sub-list for method output_type
 	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -256,13 +323,14 @@ func file_order_service_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_order_service_proto_rawDesc), len(file_order_service_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_order_service_proto_goTypes,
 		DependencyIndexes: file_order_service_proto_depIdxs,
+		EnumInfos:         file_order_service_proto_enumTypes,
 		MessageInfos:      file_order_service_proto_msgTypes,
 	}.Build()
 	File_order_service_proto = out.File
