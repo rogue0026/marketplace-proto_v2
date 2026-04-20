@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package notifications;
+
+option go_package = "notifications/pb";
+
+enum Reason {
+    NOTIFICATIONS_NOT_FOUND = 0;
+}
+
+message GetUserNotificationsRequest {
+    uint64 user_id = 1;
+    uint64 limit = 2;
+    uint64 offset = 3;
+}
+
+message GetUserNotificationsResponse {
+    message Notification {
+        uint64 id = 1;
+        uint64 user_id = 2;
+        string title = 3;
+        string body = 4;
+        int64 created_at_unix = 5;
+    }
+
+    repeated Notification notifications = 1;
+}
+
+service NotificationService {
+    rpc GetUserNotifications(GetUserNotificationsRequest) returns (GetUserNotificationsResponse) {}
+}
